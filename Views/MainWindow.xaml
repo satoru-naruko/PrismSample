@@ -5,6 +5,14 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <StackPanel>
+            <Label Content="システム日時"></Label>
+            <Label Content="{Binding SystemDate}"></Label>
+            <Button Content="日時更新"
+                    Command="{Binding SystemDateUpdateCmd}"/>
+            <Button Content="ShowViewA"
+                    Command="{Binding ShowViewACmd}"/>
+            <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        </StackPanel>
     </Grid>
 </Window>
