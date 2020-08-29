@@ -12,6 +12,10 @@
                     Command="{Binding SystemDateUpdateCmd}"/>
             <Button Content="ShowViewA"
                     Command="{Binding ShowViewACmd}"/>
+            <Button Content="ShowViewAWithParam"
+                    Command="{Binding ShowViewAWithParamCmd}"/>
+            <Button Content="ShowViewB"
+                    Command="{Binding ShowViewBCmd}"/>
             <ContentControl prism:RegionManager.RegionName="ContentRegion" />
         </StackPanel>
     </Grid>

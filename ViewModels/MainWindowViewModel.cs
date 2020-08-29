@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using PrismSample.Views;
 
 namespace PrismSample.ViewModels
@@ -22,16 +23,27 @@ namespace PrismSample.ViewModels
         }
 
         private IRegionManager _regionManager;
-        public MainWindowViewModel(IRegionManager regionManager)
+        private IDialogService _dialogService;
+        public MainWindowViewModel(IRegionManager regionManager,
+            IDialogService dialogService
+            )
         {
             _regionManager = regionManager;
+            _dialogService = dialogService;
+
             SystemDateUpdateCmd = new DelegateCommand(
                 SystemDateUpdateExecute
-                );
+            );
 
             ShowViewACmd = new DelegateCommand(
                 ShowViewA
-                );
+            );
+            ShowViewAWithParamCmd = new DelegateCommand(
+                ShowViewAWithParam
+            );
+            ShowViewBCmd = new DelegateCommand(
+                ShowViewB
+            );
 
         }
         public DelegateCommand SystemDateUpdateCmd { get; }
@@ -45,6 +57,22 @@ namespace PrismSample.ViewModels
         private void ShowViewA()
         {
             _regionManager.RequestNavigate("ContentRegion", nameof(ViewA));
+        }
+
+        public DelegateCommand ShowViewAWithParamCmd { get; }
+        private void ShowViewAWithParam()
+        {
+            var param = new NavigationParameters();
+            param.Add(nameof(ViewAViewModel.MyLabel), SystemDate);
+            _regionManager.RequestNavigate("ContentRegion", nameof(ViewA), param);
+        }
+
+        public DelegateCommand ShowViewBCmd { get; }
+        private void ShowViewB()
+        {
+            var param = new DialogParameters();
+            param.Add(nameof(ViewBViewModel.ViewBTextBox), SystemDate);
+            _dialogService.ShowDialog(nameof(ViewB),param,null);
         }
 
     }

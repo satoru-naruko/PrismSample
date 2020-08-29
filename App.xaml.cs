@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
+using PrismSample.ViewModels;
 
 namespace PrismSample
 {
@@ -18,6 +19,8 @@ namespace PrismSample
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<ViewA>();
+            containerRegistry.RegisterDialog<ViewB, ViewBViewModel>();
+
         }
     }
 }
