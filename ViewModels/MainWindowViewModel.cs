@@ -72,8 +72,15 @@ namespace PrismSample.ViewModels
         {
             var param = new DialogParameters();
             param.Add(nameof(ViewBViewModel.ViewBTextBox), SystemDate);
-            _dialogService.ShowDialog(nameof(ViewB),param,null);
+            _dialogService.ShowDialog(nameof(ViewB),param, ViewBClose);
         }
-
+        
+        private  void ViewBClose(IDialogResult dialogResult)
+        {
+            if (dialogResult.Result == ButtonResult.OK)
+            {
+                SystemDate = dialogResult.Parameters.GetValue<string>(nameof(ViewBViewModel.ViewBTextBox));
+            }
+        }
     }
 }

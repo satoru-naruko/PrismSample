@@ -17,7 +17,9 @@ namespace PrismSample.ViewModels
         }
         public ViewBViewModel()
         {
-
+            OKCmd = new DelegateCommand(
+                OKCmdExecute
+                );
         }
 
         public string Title => "Prism Sample B";
@@ -36,6 +38,15 @@ namespace PrismSample.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             ViewBTextBox = parameters.GetValue<string>(nameof(ViewBTextBox));
+        }
+
+        public DelegateCommand OKCmd { get; }
+        private void OKCmdExecute()
+        {
+            var param = new DialogParameters();
+            param.Add(nameof(ViewBTextBox), ViewBTextBox);
+            RequestClose?.Invoke(new DialogResult(ButtonResult.OK,param));
+
         }
     }
 }
