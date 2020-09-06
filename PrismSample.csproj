@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Service\IMessageService.cs" />
     <Compile Include="Service\MessageService.cs" />
+    <Compile Include="ViewModels\ComboBoxViewModel.cs" />
     <Compile Include="ViewModels\ViewAViewModel.cs" />
     <Compile Include="ViewModels\ViewBViewModel.cs" />
     <Compile Include="ViewModels\ViewCViewModel.cs" />

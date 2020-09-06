@@ -10,6 +10,11 @@
                    FontSize="50"/>
             <ListBox Height="100" Width="200" Margin="10"
                      ItemsSource="{Binding MyList}"/>
+            <ComboBox ItemsSource="{Binding Areas}"
+                      SelectedValuePath="Value"
+                      DisplayMemberPath="DisplayValue"
+                      SelectedItem="{Binding SelectedArea}"/>
+
         </StackPanel>
     </Grid>
 </UserControl>

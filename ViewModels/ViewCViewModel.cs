@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace PrismSample.ViewModels
 {
@@ -24,6 +25,12 @@ namespace PrismSample.ViewModels
             MyList.Add("ListContent1");
             MyList.Add("ListContent2");
             MyList.Add("ListContent3");
+
+            Areas.Add(new ComboBoxViewModel(1,"横浜"));
+            Areas.Add(new ComboBoxViewModel(2,"神戸"));
+            Areas.Add(new ComboBoxViewModel(3,"高松"));
+
+            SelectedArea = Areas[0];
         }
 
         private ObservableCollection<string> _myList = new ObservableCollection<string>();
@@ -31,6 +38,20 @@ namespace PrismSample.ViewModels
         {
             get { return _myList; }
             set { SetProperty(ref _myList, value); }
+        }
+
+        private ObservableCollection<ComboBoxViewModel> _areas = new ObservableCollection<ComboBoxViewModel>();
+        public ObservableCollection<ComboBoxViewModel> Areas
+        {
+            get { return _areas; }
+            set { SetProperty(ref _areas, value); }
+        }
+
+        private ComboBoxViewModel _selectedArea;
+        public ComboBoxViewModel SelectedArea
+        {
+            get { return _selectedArea; }
+            set { SetProperty(ref _selectedArea, value); }
         }
 
         public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
