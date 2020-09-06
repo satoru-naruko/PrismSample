@@ -44,6 +44,9 @@ namespace PrismSample.ViewModels
             ShowViewBCmd = new DelegateCommand(
                 ShowViewB
             );
+            ShowViewCCmd = new DelegateCommand(
+                ShowViewC
+            );
 
         }
         public DelegateCommand SystemDateUpdateCmd { get; }
@@ -74,7 +77,14 @@ namespace PrismSample.ViewModels
             param.Add(nameof(ViewBViewModel.ViewBTextBox), SystemDate);
             _dialogService.ShowDialog(nameof(ViewB),param, ViewBClose);
         }
-        
+
+        public DelegateCommand ShowViewCCmd { get; }
+        private void ShowViewC()
+        {
+            _regionManager.RequestNavigate("ContentRegion", nameof(ViewC));
+
+        }
+
         private  void ViewBClose(IDialogResult dialogResult)
         {
             if (dialogResult.Result == ButtonResult.OK)

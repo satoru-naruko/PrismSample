@@ -19,6 +19,7 @@ namespace PrismSample
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<ViewA>();
+            containerRegistry.RegisterForNavigation<ViewC>();
             containerRegistry.RegisterDialog<ViewB, ViewBViewModel>();
 
         }
