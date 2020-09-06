@@ -4,6 +4,7 @@ using Prism.Regions;
 using PrismSample.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace PrismSample.ViewModels
@@ -19,6 +20,17 @@ namespace PrismSample.ViewModels
         public ViewCViewModel(IMessageService messageService)
         {
             _messageService = messageService;
+
+            MyList.Add("ListContent1");
+            MyList.Add("ListContent2");
+            MyList.Add("ListContent3");
+        }
+
+        private ObservableCollection<string> _myList = new ObservableCollection<string>();
+        public ObservableCollection<string> MyList
+        {
+            get { return _myList; }
+            set { SetProperty(ref _myList, value); }
         }
 
         public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
