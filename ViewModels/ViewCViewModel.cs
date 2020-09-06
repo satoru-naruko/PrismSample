@@ -22,6 +22,10 @@ namespace PrismSample.ViewModels
         {
             _messageService = messageService;
 
+            AreaSelectionChanged = new DelegateCommand(
+                AreaSelectionChangedExecute
+                );
+
             MyList.Add("ListContent1");
             MyList.Add("ListContent2");
             MyList.Add("ListContent3");
@@ -54,6 +58,8 @@ namespace PrismSample.ViewModels
             set { SetProperty(ref _selectedArea, value); }
         }
 
+        public DelegateCommand AreaSelectionChanged { get; }
+
         public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
         {
             if (_messageService.Question("閉じますか？") == System.Windows.MessageBoxResult.OK)
@@ -73,6 +79,11 @@ namespace PrismSample.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+        }
+
+        private void AreaSelectionChangedExecute()
+        {
+
         }
     }
 }
