@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Unity.Injection;
 
 namespace PrismSample.ViewModels
 {
@@ -22,7 +23,7 @@ namespace PrismSample.ViewModels
         {
             _messageService = messageService;
 
-            AreaSelectionChanged = new DelegateCommand(
+            AreaSelectionChanged = new DelegateCommand<object[]>(
                 AreaSelectionChangedExecute
                 );
 
@@ -58,7 +59,14 @@ namespace PrismSample.ViewModels
             set { SetProperty(ref _selectedArea, value); }
         }
 
-        public DelegateCommand AreaSelectionChanged { get; }
+        private string _testSelectedArea;
+        public string TestSelectedArea
+        {
+            get { return _testSelectedArea; }
+            set { SetProperty(ref _testSelectedArea, value); }
+        }
+
+        public DelegateCommand<object[]> AreaSelectionChanged { get; }
 
         public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
         {
@@ -81,9 +89,13 @@ namespace PrismSample.ViewModels
         {
         }
 
-        private void AreaSelectionChangedExecute()
+        private void AreaSelectionChangedExecute(object[] items)
         {
-
+            var obj = items[0] as ComboBoxViewModel;
+            if ( obj is ComboBoxViewModel)
+            {
+                TestSelectedArea = obj.DisplayValue;
+            }            
         }
     }
 }
