@@ -22,6 +22,13 @@ namespace PrismSample.ViewModels
             set { SetProperty(ref _systemDate, value); }
         }
 
+        private bool _buttonEnable = false;
+        public bool ButtonEnable
+        {
+            get { return _buttonEnable; }
+            set { SetProperty(ref _buttonEnable, value); }
+        }
+
         private IRegionManager _regionManager;
         private IDialogService _dialogService;
         public MainWindowViewModel(IRegionManager regionManager,
@@ -37,7 +44,7 @@ namespace PrismSample.ViewModels
 
             ShowViewACmd = new DelegateCommand(
                 ShowViewA
-            );
+            ).ObservesCanExecute(() => ButtonEnable);
             ShowViewAWithParamCmd = new DelegateCommand(
                 ShowViewAWithParam
             );
@@ -53,6 +60,7 @@ namespace PrismSample.ViewModels
 
         private void SystemDateUpdateExecute()
         {
+            ButtonEnable = true;
             SystemDate = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
         }
 
